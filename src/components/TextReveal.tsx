@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useMemo } from 'react';
 interface TextRevealProps {
   children: string;
   baseOpacity?: number;
+  revealColor?: string;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -10,6 +11,7 @@ interface TextRevealProps {
 const TextReveal: React.FC<TextRevealProps> = ({ 
   children, 
   baseOpacity = 0.08,
+  revealColor = 'inherit',
   className = '',
   style = {}
 }) => {
@@ -59,6 +61,11 @@ const TextReveal: React.FC<TextRevealProps> = ({
         const charProgress = Math.max(0, Math.min(1, progress * 2 - (index / chars.length) * 0.8));
         const opacity = baseOpacity + (1 - baseOpacity) * Math.pow(charProgress, 0.8); // Curva mais suave
         (char as HTMLElement).style.opacity = opacity.toString();
+        
+        // Quando completamente revelado, garante que a cor seja a especificada
+        if (opacity > 0.9) {
+          (char as HTMLElement).style.color = revealColor;
+        }
       });
     };
 
@@ -71,7 +78,7 @@ const TextReveal: React.FC<TextRevealProps> = ({
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [baseOpacity]);
+  }, [baseOpacity, revealColor]);
 
   return (
     <div 
@@ -89,7 +96,7 @@ const TextReveal: React.FC<TextRevealProps> = ({
           style={{
             display: 'inline-block',
             opacity: baseOpacity,
-            transition: 'opacity 0.1s ease-out',
+            transition: 'opacity 0.1s ease-out, color 0.1s ease-out',
             fontSize: 'inherit',
             fontWeight: 'inherit',
             color: 'inherit',

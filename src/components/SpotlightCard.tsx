@@ -4,12 +4,18 @@ import './SpotlightCard.css';
 interface SpotlightCardProps extends React.PropsWithChildren {
   className?: string;
   spotlightColor?: `rgba(${number}, ${number}, ${number}, ${number})`;
+  theme?: 'dark' | 'light';
+  backgroundColor?: string;
+  borderColor?: string;
 }
 
 const SpotlightCard: React.FC<SpotlightCardProps> = ({
   children,
   className = '',
-  spotlightColor = 'rgba(255, 255, 255, 0.25)'
+  spotlightColor = 'rgba(255, 255, 255, 0.25)',
+  theme = 'dark',
+  backgroundColor,
+  borderColor
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
 
@@ -25,8 +31,25 @@ const SpotlightCard: React.FC<SpotlightCardProps> = ({
     divRef.current.style.setProperty('--spotlight-color', spotlightColor);
   };
 
+  // Define cores baseadas no tema
+  const cardBackgroundColor = backgroundColor || (theme === 'dark' 
+    ? 'rgba(255, 255, 255, 0.05)' 
+    : 'rgba(0, 0, 0, 0.05)');
+    
+  const cardBorderColor = borderColor || (theme === 'dark' 
+    ? 'rgba(255, 255, 255, 0.1)' 
+    : 'rgba(0, 0, 0, 0.15)');
+
   return (
-    <div ref={divRef} onMouseMove={handleMouseMove} className={`card-spotlight ${className}`}>
+    <div 
+      ref={divRef} 
+      onMouseMove={handleMouseMove} 
+      className={`card-spotlight ${className}`}
+      style={{
+        backgroundColor: cardBackgroundColor,
+        borderColor: cardBorderColor,
+      }}
+    >
       {children}
     </div>
   );

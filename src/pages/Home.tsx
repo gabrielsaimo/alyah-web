@@ -162,7 +162,10 @@ const Home = () => {
                 marginBottom: "25px",
               }}
             >
-              <TextReveal baseOpacity={0.06}>
+              <TextReveal 
+                baseOpacity={0.06}
+                revealColor={theme === "dark" ? "#ffffff" : "#000000"}
+              >
                 Olá! Sou um desenvolvedor apaixonado por criar experiências
                 digitais incríveis. Com mais de 5 anos de experiência,
                 especializo-me em tecnologias modernas como React, TypeScript,
@@ -217,7 +220,12 @@ const Home = () => {
           }}
         >
           <ScrollReveal delay={200}>
-            <SpotlightCard spotlightColor="rgba(52, 152, 219, 0.3)">
+            <SpotlightCard 
+              spotlightColor="rgba(52, 152, 219, 0.3)"
+              theme={theme}
+              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
+              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+            >
               <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
                 <div
                   style={{
@@ -286,7 +294,12 @@ const Home = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={300}>
-            <SpotlightCard spotlightColor="rgba(231, 76, 60, 0.3)">
+            <SpotlightCard 
+              spotlightColor="rgba(231, 76, 60, 0.3)"
+              theme={theme}
+              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
+              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+            >
               <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
                 <div
                   style={{
@@ -355,7 +368,12 @@ const Home = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={400}>
-            <SpotlightCard spotlightColor="rgba(39, 174, 96, 0.3)">
+            <SpotlightCard 
+              spotlightColor="rgba(39, 174, 96, 0.3)"
+              theme={theme}
+              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
+              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+            >
               <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
                 <div
                   style={{
@@ -424,7 +442,12 @@ const Home = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={500}>
-            <SpotlightCard spotlightColor="rgba(155, 89, 182, 0.3)">
+            <SpotlightCard 
+              spotlightColor="rgba(155, 89, 182, 0.3)"
+              theme={theme}
+              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
+              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+            >
               <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
                 <div
                   style={{
@@ -493,7 +516,12 @@ const Home = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={600}>
-            <SpotlightCard spotlightColor="rgba(241, 196, 15, 0.3)">
+            <SpotlightCard 
+              spotlightColor="rgba(241, 196, 15, 0.3)"
+              theme={theme}
+              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
+              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+            >
               <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
                 <div
                   style={{
@@ -562,7 +590,12 @@ const Home = () => {
           </ScrollReveal>
 
           <ScrollReveal delay={700}>
-            <SpotlightCard spotlightColor="rgba(26, 188, 156, 0.3)">
+            <SpotlightCard 
+              spotlightColor="rgba(26, 188, 156, 0.3)"
+              theme={theme}
+              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
+              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+            >
               <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
                 <div
                   style={{
