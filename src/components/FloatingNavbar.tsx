@@ -153,7 +153,7 @@ const FloatingNavbar = () => {
           >
             <img
               src="/alyah_logo.png"
-              alt="Alyah Web"
+              alt="Alyah"
               style={{
                 height: scrollY <= 150 ? "40px" : "30px",
                 width: "auto",

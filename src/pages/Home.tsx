@@ -77,7 +77,7 @@ const Home = () => {
                   : "2px 2px 4px rgba(255,255,255,0.8)",
             }}
           >
-            Bem-vindo à Alyah Web
+            Bem-vindo à Alyah
           </h1>
 
           <p

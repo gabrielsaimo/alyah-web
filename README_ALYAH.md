@@ -1,4 +1,4 @@
-# Alyah Web - Landing Page
+# Alyah - Landing Page
 
 Uma landing page moderna desenvolvida com **Vite**, **TypeScript**, **SWC** e **React**, apresentando três páginas principais: Home, Sobre e Contato.
 
@@ -130,4 +130,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-Desenvolvido com ❤️ por [Alyah Web](https://alyahweb.com.br)
+Desenvolvido com ❤️ por [Alyah](https://alyahweb.com.br)
