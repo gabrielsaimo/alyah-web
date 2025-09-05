@@ -1,0 +1,55 @@
+.scroll-reveal {
+  display: block;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+}
+
+.scroll-reveal-text {
+  display: inline;
+  line-height: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.char {
+  display: inline-block;
+  opacity: 0.3; /* Inicialmente visível mas apagado */
+  will-change: opacity;
+  transition: none; /* Deixamos o GSAP controlar a transição */
+}
+
+.char.space {
+  width: 0.25em;
+}
+
+/* Herda estilos do elemento pai */
+.scroll-reveal h1 .char,
+.scroll-reveal h2 .char,
+.scroll-reveal h3 .char,
+.scroll-reveal h4 .char,
+.scroll-reveal h5 .char,
+.scroll-reveal h6 .char,
+.scroll-reveal p .char,
+.scroll-reveal span .char,
+.scroll-reveal div .char {
+  font-weight: inherit;
+  font-size: inherit;
+  color: inherit;
+  line-height: inherit;
+  font-family: inherit;
+}
+
+/* Remove qualquer transformação ou filtro */
+.char {
+  transform: none;
+  filter: none;
+}
+
+/* Otimizações de performance */
+.scroll-reveal,
+.scroll-reveal * {
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

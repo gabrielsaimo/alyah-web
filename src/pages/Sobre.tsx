@@ -1,16 +1,20 @@
+import { useTheme } from '../context/ThemeContext';
+
 const Sobre = () => {
+  const { colors } = useTheme();
+
   return (
     <div style={{
       padding: '20px',
       maxWidth: '1200px',
       margin: '0 auto',
-      backgroundColor: '#0a0a0a',
+      backgroundColor: colors.background,
       minHeight: '100vh'
     }}>
       <h1 style={{
         textAlign: 'center',
         marginBottom: '40px',
-        color: '#ffffff',
+        color: colors.text,
         fontSize: '3rem',
         fontWeight: 'bold'
       }}>

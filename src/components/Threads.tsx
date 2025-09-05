@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Triangle, Color } from 'ogl';
+import { useTheme } from '../context/ThemeContext';
 
 interface ThreadsProps {
   color?: [number, number, number];
@@ -126,12 +127,20 @@ void main() {
 `;
 
 const Threads: React.FC<ThreadsProps> = ({
-  color = [1, 1, 1],
+  color,
   amplitude = 1,
   distance = 0,
   enableMouseInteraction = false,
   ...rest
 }) => {
+  const { theme } = useTheme();
+  
+  // Define cores baseadas no tema se não for fornecida
+  const defaultColor: [number, number, number] = theme === 'dark' 
+    ? [0.2, 0.6, 1.0]  // Azul para tema escuro
+    : [0.4, 0.4, 0.4]; // Cinza para tema claro
+    
+  const finalColor = color || defaultColor;
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number>(0);
 
@@ -155,7 +164,7 @@ const Threads: React.FC<ThreadsProps> = ({
         iResolution: {
           value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height)
         },
-        uColor: { value: new Color(...color) },
+        uColor: { value: new Color(...finalColor) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
         uMouse: { value: new Float32Array([0.5, 0.5]) }
@@ -217,7 +226,7 @@ const Threads: React.FC<ThreadsProps> = ({
       if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
-  }, [color, amplitude, distance, enableMouseInteraction]);
+  }, [finalColor, amplitude, distance, enableMouseInteraction, theme]);
 
   return <div ref={containerRef} style={{ width: '100%', height: '100%', position: 'relative' }} {...rest} />;
 };

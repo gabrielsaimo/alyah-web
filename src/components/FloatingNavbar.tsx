@@ -1,30 +1,95 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 
 const FloatingNavbar = () => {
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const { theme, toggleTheme, colors } = useTheme();
   const location = useLocation();
 
   useEffect(() => {
+    let ticking = false;
+    
     const controlNavbar = () => {
-      if (typeof window !== "undefined") {
-        const currentScrollY = window.scrollY;
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
+      ticking = false;
+    };
 
-        // Controla expansão - expande quando rola para baixo
-        setIsExpanded(currentScrollY > 80);
-
-        setLastScrollY(currentScrollY);
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(controlNavbar);
+        ticking = true;
       }
     };
 
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", controlNavbar);
-      return () => {
-        window.removeEventListener("scroll", controlNavbar);
-      };
-    }
-  }, [lastScrollY]);
+    // Usa requestAnimationFrame para performance otimizada
+    window.addEventListener("scroll", requestTick, { passive: true });
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", requestTick);
+    };
+  }, []);
+
+  // Função para calcular valores com interpolação suave
+  const getStageValue = (expandedValue: number, retractedValue: number) => {
+    const currentScrollY = scrollY;
+    const maxScroll = 300;
+    const progress = Math.min(currentScrollY / maxScroll, 1);
+    
+    // Curva easing cubic-bezier para suavidade profissional
+    const easedProgress = progress < 0.5 
+      ? 4 * progress * progress * progress 
+      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    
+    return expandedValue + (retractedValue - expandedValue) * easedProgress;
+  };
+
+  // Função para calcular largura com valores mais fluidos
+  const getWidth = () => {
+    return `${getStageValue(90, 65)}%`; // Redução mais sutil
+  };
+
+  // Função para calcular maxWidth
+  const getMaxWidth = () => {
+    return `${getStageValue(1200, 750)}px`; // Transição mais gradual
+  };
+
+  // Função para calcular minWidth
+  const getMinWidth = () => {
+    return `${getStageValue(600, 520)}px`; // Mudança menor para fluidez
+  };
+
+  // Função para calcular tamanho da fonte dos links
+  const getLinkFontSize = () => {
+    return `${getStageValue(14, 13)}px`; // Diferença menor para suavidade
+  };
+
+  // Função para calcular gap entre elementos
+  const getNavGap = () => {
+    return `${getStageValue(24, 18)}px`; // Redução mais sutil
+  };
+
+  // Função para calcular opacidade do fundo com curva suave
+  const getBackgroundOpacity = () => {
+    return getStageValue(0.25, 0.65); // Valores mais equilibrados
+  };
+
+  // Função para calcular blur com progressão natural
+  const getBlurAmount = () => {
+    return `${getStageValue(6, 18)}px`; // Começar com menos blur
+  };
+
+  // Função para calcular opacidade da borda
+  const getBorderOpacity = () => {
+    return getStageValue(0.08, 0.25); // Progressão mais sutil
+  };
+
+  // Função para calcular opacidade da sombra
+  const getShadowOpacity = () => {
+    return getStageValue(0.05, 0.35); // Sombra mais sutil inicialmente
+  };
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -38,54 +103,77 @@ const FloatingNavbar = () => {
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 1000,
-        transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
-        width: isExpanded ? "90%" : "70%",
-        maxWidth: isExpanded ? "1200px" : "800px",
-        minWidth: "600px",
+        transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)", // Easing profissional
+        width: getWidth(),
+        maxWidth: getMaxWidth(),
+        minWidth: getMinWidth(),
+        willChange: "width, max-width, min-width", // Otimização de performance
       }}
     >
       <div
         style={{
-          backgroundColor: "rgba(0, 0, 0, 0.4)",
-          backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
+          backgroundColor: `rgba(${colors.navBackground}, ${getBackgroundOpacity()})`,
+          backdropFilter: `blur(${getBlurAmount()})`,
+          border: `1px solid rgba(${colors.navBorder}, ${getBorderOpacity()})`,
           borderRadius: "16px",
           padding: "12px 32px",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
-          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+          transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          boxShadow: `0 8px 32px rgba(${colors.navShadow}, ${getShadowOpacity()})`,
           width: "100%",
+          willChange: "background-color, backdrop-filter, border, box-shadow", // Performance
         }}
       >
         {/* Logo - sempre visível */}
         <div
           style={{
-            fontSize: "1.5rem",
-            fontWeight: "bold",
-            color: "#ffffff",
             whiteSpace: "nowrap",
-            transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
+            transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            willChange: "transform",
           }}
         >
           <Link
             to="/"
             style={{
-              color: "#ffffff",
               textDecoration: "none",
-              transition: "color 0.3s ease",
+              transition: "all 0.3s ease",
+              display: "flex",
+              alignItems: "center",
             }}
             onMouseEnter={(e) => {
               const target = e.target as HTMLElement;
-              target.style.color = "#3498db";
+              target.style.transform = "scale(1.05)";
             }}
             onMouseLeave={(e) => {
               const target = e.target as HTMLElement;
-              target.style.color = "#ffffff";
+              target.style.transform = "scale(1)";
             }}
           >
-            Alyah Web
+            <img
+              src="/alyah_logo.png"
+              alt="Alyah Web"
+              style={{
+                height: scrollY <= 150 ? "40px" : "30px",
+                width: "auto",
+                transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                willChange: "height",
+                filter: theme === 'light' ? 'invert(1)' : 'none',
+              }}
+              onError={(e) => {
+                // Fallback para texto se a imagem não carregar
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                const fallbackText = document.createElement('span');
+                fallbackText.textContent = 'ALYAH';
+                fallbackText.style.fontSize = scrollY <= 150 ? "24px" : "20px";
+                fallbackText.style.fontWeight = "bold";
+                fallbackText.style.color = colors.text;
+                fallbackText.style.transition = "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+                target.parentNode?.appendChild(fallbackText);
+              }}
+            />
           </Link>
         </div>
 
@@ -94,38 +182,40 @@ const FloatingNavbar = () => {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "24px",
-            transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
+            gap: getNavGap(),
+            transition: "gap 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+            willChange: "gap",
           }}
         >
           <Link
             to="/"
             style={{
-              color: isActive("/") ? "#3498db" : "#ffffff",
+              color: isActive("/") ? colors.accent : colors.text,
               textDecoration: "none",
-              fontSize: "14px",
+              fontSize: getLinkFontSize(),
               fontWeight: "500",
               padding: "8px 16px",
               borderRadius: "8px",
-              transition: "all 0.3s ease",
+              transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               backgroundColor: isActive("/")
                 ? "rgba(52, 152, 219, 0.1)"
                 : "transparent",
               border: isActive("/")
                 ? "1px solid rgba(52, 152, 219, 0.3)"
                 : "1px solid transparent",
+              willChange: "color, background-color, border",
             }}
             onMouseEnter={(e) => {
               const target = e.target as HTMLElement;
               if (!isActive("/")) {
-                target.style.color = "#3498db";
+                target.style.color = colors.accent;
                 target.style.backgroundColor = "rgba(52, 152, 219, 0.05)";
               }
             }}
             onMouseLeave={(e) => {
               const target = e.target as HTMLElement;
               if (!isActive("/")) {
-                target.style.color = "#ffffff";
+                target.style.color = colors.text;
                 target.style.backgroundColor = "transparent";
               }
             }}
@@ -136,31 +226,32 @@ const FloatingNavbar = () => {
           <Link
             to="/sobre"
             style={{
-              color: isActive("/sobre") ? "#3498db" : "#ffffff",
+              color: isActive("/sobre") ? colors.accent : colors.text,
               textDecoration: "none",
-              fontSize: "14px",
+              fontSize: getLinkFontSize(),
               fontWeight: "500",
               padding: "8px 16px",
               borderRadius: "8px",
-              transition: "all 0.3s ease",
+              transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               backgroundColor: isActive("/sobre")
                 ? "rgba(52, 152, 219, 0.1)"
                 : "transparent",
               border: isActive("/sobre")
                 ? "1px solid rgba(52, 152, 219, 0.3)"
                 : "1px solid transparent",
+              willChange: "color, background-color, border",
             }}
             onMouseEnter={(e) => {
               const target = e.target as HTMLElement;
               if (!isActive("/sobre")) {
-                target.style.color = "#3498db";
+                target.style.color = colors.accent;
                 target.style.backgroundColor = "rgba(52, 152, 219, 0.05)";
               }
             }}
             onMouseLeave={(e) => {
               const target = e.target as HTMLElement;
               if (!isActive("/sobre")) {
-                target.style.color = "#ffffff";
+                target.style.color = colors.text;
                 target.style.backgroundColor = "transparent";
               }
             }}
@@ -171,31 +262,32 @@ const FloatingNavbar = () => {
           <Link
             to="/contato"
             style={{
-              color: isActive("/contato") ? "#3498db" : "#ffffff",
+              color: isActive("/contato") ? colors.accent : colors.text,
               textDecoration: "none",
-              fontSize: "14px",
+              fontSize: getLinkFontSize(),
               fontWeight: "500",
               padding: "8px 16px",
               borderRadius: "8px",
-              transition: "all 0.3s ease",
+              transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               backgroundColor: isActive("/contato")
                 ? "rgba(52, 152, 219, 0.1)"
                 : "transparent",
               border: isActive("/contato")
                 ? "1px solid rgba(52, 152, 219, 0.3)"
                 : "1px solid transparent",
+              willChange: "color, background-color, border",
             }}
             onMouseEnter={(e) => {
               const target = e.target as HTMLElement;
               if (!isActive("/contato")) {
-                target.style.color = "#3498db";
+                target.style.color = colors.accent;
                 target.style.backgroundColor = "rgba(52, 152, 219, 0.05)";
               }
             }}
             onMouseLeave={(e) => {
               const target = e.target as HTMLElement;
               if (!isActive("/contato")) {
-                target.style.color = "#ffffff";
+                target.style.color = colors.text;
                 target.style.backgroundColor = "transparent";
               }
             }}
@@ -204,58 +296,40 @@ const FloatingNavbar = () => {
           </Link>
         </nav>
 
-        {/* CTA Button - sempre visível */}
+        {/* Theme Toggle Icon - sempre visível */}
         <div
           style={{
             whiteSpace: "nowrap",
             transition: "all 1s cubic-bezier(0.4, 0, 0.2, 1)",
           }}
         >
-          <button
+          <span
             style={{
-              backgroundColor: "#3498db",
-              color: "#ffffff",
-              border: "none",
-              borderRadius: "8px",
-              padding: "10px 20px",
-              fontSize: "14px",
-              fontWeight: "600",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
-              gap: "8px",
-              transition: "all 0.3s ease",
-              whiteSpace: "nowrap",
+              justifyContent: "center",
+              transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+              fontSize: scrollY <= 150 ? "20px" : "18px",
+              padding: "8px",
+              userSelect: "none",
+              willChange: "transform, font-size",
+              color: colors.text,
+              filter: "grayscale(1)",
             }}
-            onClick={() => (window.location.href = "/contato")}
+            onClick={toggleTheme}
             onMouseEnter={(e) => {
               const target = e.target as HTMLElement;
-              target.style.backgroundColor = "#2980b9";
-              target.style.transform = "translateY(-1px)";
+              target.style.transform = "scale(1.2)";
             }}
             onMouseLeave={(e) => {
               const target = e.target as HTMLElement;
-              target.style.backgroundColor = "#3498db";
-              target.style.transform = "translateY(0)";
+              target.style.transform = "scale(1)";
             }}
+            title={`Trocar para tema ${theme === 'dark' ? 'claro' : 'escuro'}`}
           >
-            Orçamento
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M7 17L17 7M17 7H7M17 7V17"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </button>
+            {theme === 'dark' ? '☀️' : '🌙'}
+          </span>
         </div>
       </div>
     </header>

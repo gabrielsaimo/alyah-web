@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 const Contato = () => {
+  const { colors } = useTheme();
   const [formData, setFormData] = useState({
     nome: '',
     email: '',
@@ -30,13 +32,13 @@ const Contato = () => {
   const inputStyle = {
     width: '100%',
     padding: '12px',
-    border: '1px solid #555555',
+    border: `1px solid ${colors.border}`,
     borderRadius: '8px',
     fontSize: '16px',
     transition: 'border-color 0.3s',
     boxSizing: 'border-box' as const,
-    backgroundColor: '#333333',
-    color: '#ffffff'
+    backgroundColor: colors.surface,
+    color: colors.text
   };
 
   return (
@@ -44,7 +46,7 @@ const Contato = () => {
       padding: '20px',
       maxWidth: '1200px',
       margin: '0 auto',
-      backgroundColor: '#0a0a0a',
+      backgroundColor: colors.background,
       minHeight: '100vh'
     }}>
       <h1 style={{
