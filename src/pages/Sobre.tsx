@@ -1,7 +1,6 @@
 import { useTheme } from '../context/ThemeContext';
 import GradualSpacing from '../components/GradualSpacing';
 import BlurIn from '../components/BlurIn';
-import FadeIn from '../components/FadeIn';
 import NumberTicker from '../components/NumberTicker';
 import Threads from '../components/Threads';
 
@@ -79,20 +78,17 @@ const Sobre = () => {
             </div>
           </BlurIn>
 
-          <FadeIn delay={800} direction="up">
-            <p style={{
-              fontSize: '20px',
-              color: colors.textSecondary,
-              maxWidth: '600px',
-              margin: '0 auto 40px',
-              lineHeight: '1.6'
-            }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-            </p>
-          </FadeIn>
+                    <p style={{
+            fontSize: 'clamp(1.2rem, 3vw, 1.5rem)',
+            color: colors.textSecondary,
+            maxWidth: '800px',
+            margin: '0 auto',
+            lineHeight: '1.8'
+          }}>
+            Somos uma agência digital focada em transformar ideias em experiências digitais excepcionais. 
+            Nossa paixão é criar soluções que conectam marcas aos seus públicos de forma autêntica e impactante.
+          </p>
 
-          <FadeIn delay={1000} direction="up">
             <div style={{
               display: 'flex',
               gap: '20px',
@@ -127,10 +123,8 @@ const Sobre = () => {
                 Lorem Ipsum
               </button>
             </div>
-          </FadeIn>
 
           {/* Skills Grid */}
-          <FadeIn delay={1200} direction="up">
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
@@ -207,7 +201,6 @@ const Sobre = () => {
                 </BlurIn>
               ))}
             </div>
-          </FadeIn>
         </div>
       </div>
 
@@ -225,7 +218,6 @@ const Sobre = () => {
           gap: '40px',
           textAlign: 'center'
         }}>
-          <FadeIn delay={200} direction="up">
             <div>
               <NumberTicker 
                 value={50}
@@ -245,9 +237,7 @@ const Sobre = () => {
                 Lorem Ipsum
               </p>
             </div>
-          </FadeIn>
 
-          <FadeIn delay={400} direction="up">
             <div>
               <NumberTicker 
                 value={5}
@@ -267,9 +257,7 @@ const Sobre = () => {
                 Dolor Sit Amet
               </p>
             </div>
-          </FadeIn>
 
-          <FadeIn delay={600} direction="up">
             <div>
               <NumberTicker 
                 value={30}
@@ -289,9 +277,7 @@ const Sobre = () => {
                 Consectetur Elit
               </p>
             </div>
-          </FadeIn>
 
-          <FadeIn delay={800} direction="up">
             <div>
               <NumberTicker 
                 value={100}
@@ -311,7 +297,6 @@ const Sobre = () => {
                 Adipiscing Elit
               </p>
             </div>
-          </FadeIn>
         </div>
       </div>
 
@@ -334,7 +319,6 @@ const Sobre = () => {
               />
             </h2>
           </BlurIn>
-          <FadeIn delay={600} direction="up">
             <p style={{
               fontSize: '18px',
               color: colors.textSecondary,
@@ -344,7 +328,6 @@ const Sobre = () => {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod 
               tempor incididunt ut labore et dolore magna aliqua.
             </p>
-          </FadeIn>
         </div>
 
         <div style={{
@@ -375,8 +358,7 @@ const Sobre = () => {
               placeholder: 'Logo Ipsum'
             }
           ].map((job, index) => (
-            <FadeIn key={index} delay={200 + index * 200} direction="left">
-              <div style={{
+              <div key={index} style={{
                 backgroundColor: colors.surface,
                 border: `1px solid ${colors.border}`,
                 borderRadius: '16px',
@@ -450,7 +432,6 @@ const Sobre = () => {
                   </p>
                 </div>
               </div>
-            </FadeIn>
           ))}
         </div>
       </div>
@@ -475,7 +456,6 @@ const Sobre = () => {
               />
             </h2>
           </BlurIn>
-          <FadeIn delay={600} direction="up">
             <p style={{
               fontSize: '18px',
               color: colors.textSecondary,
@@ -485,7 +465,6 @@ const Sobre = () => {
               Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut 
               labore et dolore magna aliqua enim ad minim.
             </p>
-          </FadeIn>
         </div>
 
         <div style={{
@@ -615,7 +594,6 @@ const Sobre = () => {
           </h2>
         </BlurIn>
         
-        <FadeIn delay={1000} direction="up">
           <button style={{
             backgroundColor: colors.accent,
             color: colors.background,
@@ -642,7 +620,6 @@ const Sobre = () => {
           >
             Lorem Ipsum
           </button>
-        </FadeIn>
       </div>
     </div>
   );
