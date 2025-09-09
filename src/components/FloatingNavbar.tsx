@@ -8,6 +8,15 @@ const FloatingNavbar = () => {
   const { theme, toggleTheme, colors } = useTheme();
   const location = useLocation();
 
+  // Função para navegar e garantir que a página inicie no topo
+  const handleNavigation = (path: string, event: React.MouseEvent) => {
+    event.preventDefault();
+    // Garantir que a página comece no topo
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    // Navegar para a nova rota
+    window.location.href = path;
+  };
+
   // Remove listener local - agora centralizado no hook
 
   // Função para calcular valores com interpolação suave
