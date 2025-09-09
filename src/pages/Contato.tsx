@@ -493,7 +493,7 @@ _Enviado através do site Alyah`;
                     </div>
                     <div>
                       <h4 style={{ margin: '0 0 5px 0', fontSize: '16px', fontWeight: 'bold' }}>WhatsApp</h4>
-                      <p style={{ margin: 0, color: customColors.textSecondary }}>(34) 8430-0932</p>
+                      <p style={{ margin: 0, color: customColors.textSecondary }}>(34) 98430-0932</p>
                     </div>
                   </div>
                 </FadeIn>
@@ -535,7 +535,7 @@ _Enviado através do site Alyah`;
                     </div>
                     <div>
                       <h4 style={{ margin: '0 0 5px 0', fontSize: '16px', fontWeight: 'bold' }}>Localização</h4>
-                      <p style={{ margin: 0, color: customColors.textSecondary }}>São Paulo, SP</p>
+                      <p style={{ margin: 0, color: customColors.textSecondary }}>Uberlândia, MG</p>
                     </div>
                   </div>
                 </FadeIn>
