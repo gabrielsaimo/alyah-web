@@ -1,65 +1,27 @@
-import { useState, useEffect } from "react";
+// removed useMemo (não necessário após simplificação)
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import { useOptimizedScroll } from "../hooks/useOptimizedScroll";
 
 const FloatingNavbar = () => {
-  const [scrollY, setScrollY] = useState(0);
+  const { y: scrollY } = useOptimizedScroll({ threshold: 10, maxIntervalMs: 120 });
   const { theme, toggleTheme, colors } = useTheme();
   const location = useLocation();
 
-  useEffect(() => {
-    let ticking = false;
-    
-    const controlNavbar = () => {
-      const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
-      ticking = false;
-    };
-
-    const requestTick = () => {
-      if (!ticking) {
-        requestAnimationFrame(controlNavbar);
-        ticking = true;
-      }
-    };
-
-    // Usa requestAnimationFrame para performance otimizada
-    window.addEventListener("scroll", requestTick, { passive: true });
-    
-    // Cleanup
-    return () => {
-      window.removeEventListener("scroll", requestTick);
-    };
-  }, []);
+  // Remove listener local - agora centralizado no hook
 
   // Função para calcular valores com interpolação suave
   const getStageValue = (expandedValue: number, retractedValue: number) => {
-    const currentScrollY = scrollY;
-    const maxScroll = 300;
-    const progress = Math.min(currentScrollY / maxScroll, 1);
-    
-    // Curva easing cubic-bezier para suavidade profissional
-    const easedProgress = progress < 0.5 
-      ? 4 * progress * progress * progress 
-      : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-    
-    return expandedValue + (retractedValue - expandedValue) * easedProgress;
+    const maxScroll = 280; // ligeiramente menor para resposta mais rápida
+    const progress = Math.min(scrollY / maxScroll, 1);
+    const eased = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    return expandedValue + (retractedValue - expandedValue) * eased;
   };
 
-  // Função para calcular largura com valores mais fluidos
-  const getWidth = () => {
-    return `${getStageValue(90, 65)}%`; // Redução mais sutil
-  };
-
-  // Função para calcular maxWidth
-  const getMaxWidth = () => {
-    return `${getStageValue(1200, 750)}px`; // Transição mais gradual
-  };
-
-  // Função para calcular minWidth
-  const getMinWidth = () => {
-    return `${getStageValue(600, 520)}px`; // Mudança menor para fluidez
-  };
+  // Funções de dimensão
+  const getWidth = () => `${getStageValue(90, 65)}%`;
+  const getMaxWidth = () => `${getStageValue(1200, 750)}px`;
+  const getMinWidth = () => `${getStageValue(600, 520)}px`;
 
   // Função para calcular tamanho da fonte dos links
   const getLinkFontSize = () => {
@@ -73,23 +35,19 @@ const FloatingNavbar = () => {
 
   // Função para calcular opacidade do fundo com curva suave
   const getBackgroundOpacity = () => {
-    return getStageValue(0.25, 0.65); // Valores mais equilibrados
+    return getStageValue(0.25, 0.55); // Valores mais equilibrados
   };
 
   // Função para calcular blur com progressão natural
   const getBlurAmount = () => {
-    return `${getStageValue(6, 18)}px`; // Começar com menos blur
+    return `${getStageValue(8, 18)}px`; // Começar com menos blur
   };
 
   // Função para calcular opacidade da borda
   const getBorderOpacity = () => {
-    return getStageValue(0.08, 0.25); // Progressão mais sutil
+    return getStageValue(0.07, 0.22); // Progressão mais sutil
   };
 
-  // Função para calcular opacidade da sombra
-  const getShadowOpacity = () => {
-    return getStageValue(0.05, 0.35); // Sombra mais sutil inicialmente
-  };
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -103,11 +61,10 @@ const FloatingNavbar = () => {
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 1000,
-        transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)", // Easing profissional
+        transition: "width 0.4s cubic-bezier(0.25,0.46,0.45,0.94), max-width 0.4s cubic-bezier(0.25,0.46,0.45,0.94), min-width 0.4s cubic-bezier(0.25,0.46,0.45,0.94)",
         width: getWidth(),
         maxWidth: getMaxWidth(),
-        minWidth: getMinWidth(),
-        willChange: "width, max-width, min-width", // Otimização de performance
+        minWidth: getMinWidth()
       }}
     >
       <div
@@ -120,9 +77,7 @@ const FloatingNavbar = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-          boxShadow: `0 8px 32px rgba(${colors.navShadow}, ${getShadowOpacity()})`,
-          width: "100%",
+          boxShadow: `0 8px 32px rgba(${colors.navShadow}, ${getStageValue(0.05, 0.3)})`,
           willChange: "background-color, backdrop-filter, border, box-shadow", // Performance
         }}
       >

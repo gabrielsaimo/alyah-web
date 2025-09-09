@@ -79,17 +79,13 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
         start: startTrigger,
         end: endTrigger,
         scrub: 0.5,
-        toggleActions: "play none none reverse",
-        onUpdate: (self) => {
-          // Debug: verificar se a animação está funcionando
-          console.log('ScrollTrigger progress:', self.progress);
-        }
+        toggleActions: "play none none reverse"
       }
     });
 
     return () => {
       tl.kill();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getById?.(el.id || '')?.kill();
     };
   }, [scrollContainerRef, baseOpacity, staggerDelay, startTrigger, endTrigger]);
 

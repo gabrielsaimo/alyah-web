@@ -1,9 +1,6 @@
 import { useTheme } from "../context/ThemeContext";
 import Threads from "../components/Threads";
-import ScrollReveal from "../components/ScrollRevealSimple";
-import TextReveal from "../components/TextReveal";
-import LogoLoop from "../components/LogoLoop";
-import SpotlightCard from "../components/SpotlightCard";
+import ScrollReveal from "../components/ScrollReveal";
 
 const Home = () => {
   const { theme, colors } = useTheme();
@@ -77,7 +74,7 @@ const Home = () => {
                   : "2px 2px 4px rgba(255,255,255,0.8)",
             }}
           >
-            Bem-vindo à Alyah
+            Bem-vindo à Alyah Web
           </h1>
 
           <p
@@ -133,535 +130,120 @@ const Home = () => {
           borderBottom: `1px solid ${colors.border}`,
         }}
       >
-        <h2
-          style={{
-            fontSize: "2.5rem",
-            fontWeight: "bold",
-            marginBottom: "40px",
-            color: colors.text,
-            textAlign: "center",
-          }}
-        >
-         Sobre Mim
-        </h2>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            marginBottom: "60px",
-          }}
-        >
-          <div style={{ maxWidth: "800px", textAlign: "center" }}>
-            <p
-              style={{
-                fontSize: "22px",
-                color: colors.textSecondary,
-                lineHeight: "1.8",
-                marginBottom: "25px",
-              }}
-            >
-              <TextReveal 
-                baseOpacity={0.06}
-                revealColor={theme === "dark" ? "#ffffff" : "#000000"}
-              >
-                Olá! Sou um desenvolvedor apaixonado por criar experiências
-                digitais incríveis. Com mais de 5 anos de experiência,
-                especializo-me em tecnologias modernas como React, TypeScript,
-                Node.js e design responsivo. Minha missão é transformar ideias
-                em soluções digitais funcionais e elegantes, sempre focando na
-                melhor experiência do usuário e nas melhores práticas de
-                desenvolvimento. Quando não estou codando, gosto de explorar
-                novas tecnologias, contribuir para projetos open source e
-                compartilhar conhecimento com a comunidade de desenvolvedores.
-              </TextReveal>
-            </p>
-
-            <ScrollReveal delay={600}>
-              <LogoLoop
-                items={["React", "TypeScript", "Node.js", "Vite", "Design UX/UI", "JavaScript", "CSS", "HTML", "Git", "MongoDB"]}
-                speed={25}
-                backgroundColor={colors.accent}
-                textColor={colors.text}
-              />
-            </ScrollReveal>
-          </div>
+        <div style={{ textAlign: "center", marginBottom: "40px" }}>
+          <ScrollReveal
+            textClassName="scroll-reveal-title"
+            containerClassName="scroll-reveal-container"
+            baseOpacity={0.2}
+            baseRotation={2}
+          >
+            Sobre Mim
+          </ScrollReveal>
         </div>
-      </div>
-
-      {/* Seção Meus Trabalhos */}
-      <div
-        style={{
-          padding: "80px 20px",
-          maxWidth: "1200px",
-          margin: "0 auto",
-          borderBottom: `1px solid ${colors.border}`,
-        }}
-      >
-        <h2
-          style={{
-            fontSize: "2.5rem",
-            fontWeight: "bold",
-            marginBottom: "40px",
-            color: colors.text,
-            textAlign: "center",
-          }}
-        >
-          <TextReveal baseOpacity={0.05}>Meus Trabalhos</TextReveal>
-        </h2>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "30px",
-            marginTop: "50px",
+            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gap: "60px",
+            alignItems: "center",
+            marginBottom: "60px",
           }}
         >
-          <ScrollReveal delay={200}>
-            <SpotlightCard 
-              spotlightColor="rgba(52, 152, 219, 0.3)"
-              theme={theme}
-              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
-              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+          <div
+            style={{
+              backgroundColor: colors.surface,
+              padding: "40px",
+              borderRadius: "20px",
+              border: `1px solid ${colors.border}`,
+              textAlign: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "120px",
+                height: "120px",
+                backgroundColor: colors.accent,
+                borderRadius: "50%",
+                margin: "0 auto 20px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "60px",
+                color: colors.text,
+                fontWeight: "bold",
+              }}
             >
-              <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    backgroundColor: colors.surface,
-                    border: `2px dashed ${colors.border}`,
-                    borderRadius: "12px",
-                    margin: "0 auto 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "14px",
-                    color: colors.textSecondary,
-                  }}
-                >
-                  Imagem do Projeto
-                </div>
-                <h3
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: colors.text,
-                    marginBottom: "15px",
-                  }}
-                >
-                  E-commerce Moderno
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: colors.textSecondary,
-                    lineHeight: "1.6",
-                    marginBottom: "20px",
-                    flex: "1",
-                  }}
-                >
-                  Plataforma completa de e-commerce com React, TypeScript e Node.js. 
-                  Sistema de pagamentos integrado e painel administrativo avançado.
-                </p>
-                <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <span style={{ 
-                    backgroundColor: colors.accent, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>React</span>
-                  <span style={{ 
-                    backgroundColor: colors.accent, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>TypeScript</span>
-                  <span style={{ 
-                    backgroundColor: colors.accent, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>Node.js</span>
-                </div>
-              </div>
-            </SpotlightCard>
-          </ScrollReveal>
+              A
+            </div>
+            <h3
+              style={{
+                fontSize: "1.8rem",
+                fontWeight: "bold",
+                color: colors.text,
+                marginBottom: "10px",
+              }}
+            >
+              MARCOS BESSA
+            </h3>
+            <p
+              style={{
+                fontSize: "16px",
+                color: colors.accent,
+                fontWeight: "500",
+              }}
+            >
+              Desenvolvedor Full Stack
+            </p>
+          </div>
 
-          <ScrollReveal delay={300}>
-            <SpotlightCard 
-              spotlightColor="rgba(231, 76, 60, 0.3)"
-              theme={theme}
-              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
-              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
-            >
-              <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    backgroundColor: colors.surface,
-                    border: `2px dashed ${colors.border}`,
-                    borderRadius: "12px",
-                    margin: "0 auto 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "14px",
-                    color: colors.textSecondary,
-                  }}
-                >
-                  Imagem do Projeto
-                </div>
-                <h3
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: colors.text,
-                    marginBottom: "15px",
-                  }}
-                >
-                  App Mobile Inovador
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: colors.textSecondary,
-                    lineHeight: "1.6",
-                    marginBottom: "20px",
-                    flex: "1",
-                  }}
-                >
-                  Aplicativo mobile com interface moderna e funcionalidades avançadas. 
-                  Desenvolvido com React Native e integração com APIs REST.
-                </p>
-                <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <span style={{ 
-                    backgroundColor: colors.error, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>React Native</span>
-                  <span style={{ 
-                    backgroundColor: colors.error, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>APIs</span>
-                  <span style={{ 
-                    backgroundColor: colors.error, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>Firebase</span>
-                </div>
-              </div>
-            </SpotlightCard>
-          </ScrollReveal>
+          <div>
+            <div style={{ marginBottom: "25px" }}>
+              <ScrollReveal
+                baseOpacity={0.3}
+                baseRotation={1}
+                textClassName="scroll-reveal-paragraph"
+              >
+                Olá! Sou um desenvolvedor que criar experiências digitais
+                incríveis. Com mais de 15 anos de experiência, especializo-me em
+                tecnologias modernas como React, TypeScript, Node.js e design
+                responsivo. Minha missão é transformar ideias em soluções
+                digitais funcionais e elegantes, sempre focando na melhor
+                experiência do usuário e nas melhores práticas de
+                desenvolvimento. Quando não estou codando, gosto de explorar
+                novas tecnologias, contribuir para projetos open source e
+                compartilhar conhecimento com a comunidade de desenvolvedores.
+              </ScrollReveal>
+            </div>
 
-          <ScrollReveal delay={400}>
-            <SpotlightCard 
-              spotlightColor="rgba(39, 174, 96, 0.3)"
-              theme={theme}
-              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
-              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
+            <div
+              style={{
+                display: "flex",
+                gap: "15px",
+                flexWrap: "wrap",
+              }}
             >
-              <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    backgroundColor: colors.surface,
-                    border: `2px dashed ${colors.border}`,
-                    borderRadius: "12px",
-                    margin: "0 auto 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "14px",
-                    color: colors.textSecondary,
-                  }}
-                >
-                  Imagem do Projeto
-                </div>
-                <h3
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: colors.text,
-                    marginBottom: "15px",
-                  }}
-                >
-                  Sistema Empresarial
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: colors.textSecondary,
-                    lineHeight: "1.6",
-                    marginBottom: "20px",
-                    flex: "1",
-                  }}
-                >
-                  Sistema completo de gestão empresarial com dashboard analytics, 
-                  relatórios em tempo real e módulos de CRM integrados.
-                </p>
-                <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <span style={{ 
-                    backgroundColor: colors.success, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>Vue.js</span>
-                  <span style={{ 
-                    backgroundColor: colors.success, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>Python</span>
-                  <span style={{ 
-                    backgroundColor: colors.success, 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>PostgreSQL</span>
-                </div>
-              </div>
-            </SpotlightCard>
-          </ScrollReveal>
-
-          <ScrollReveal delay={500}>
-            <SpotlightCard 
-              spotlightColor="rgba(155, 89, 182, 0.3)"
-              theme={theme}
-              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
-              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
-            >
-              <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    backgroundColor: colors.surface,
-                    border: `2px dashed ${colors.border}`,
-                    borderRadius: "12px",
-                    margin: "0 auto 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "14px",
-                    color: colors.textSecondary,
-                  }}
-                >
-                  Imagem do Projeto
-                </div>
-                <h3
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: colors.text,
-                    marginBottom: "15px",
-                  }}
-                >
-                  Landing Page Criativa
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: colors.textSecondary,
-                    lineHeight: "1.6",
-                    marginBottom: "20px",
-                    flex: "1",
-                  }}
-                >
-                  Landing page moderna com animações fluidas e design responsivo. 
-                  Otimizada para conversão e performance máxima.
-                </p>
-                <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <span style={{ 
-                    backgroundColor: "#9b59b6", 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>HTML5</span>
-                  <span style={{ 
-                    backgroundColor: "#9b59b6", 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>CSS3</span>
-                  <span style={{ 
-                    backgroundColor: "#9b59b6", 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>GSAP</span>
-                </div>
-              </div>
-            </SpotlightCard>
-          </ScrollReveal>
-
-          <ScrollReveal delay={600}>
-            <SpotlightCard 
-              spotlightColor="rgba(241, 196, 15, 0.3)"
-              theme={theme}
-              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
-              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
-            >
-              <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    backgroundColor: colors.surface,
-                    border: `2px dashed ${colors.border}`,
-                    borderRadius: "12px",
-                    margin: "0 auto 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "14px",
-                    color: colors.textSecondary,
-                  }}
-                >
-                  Imagem do Projeto
-                </div>
-                <h3
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: colors.text,
-                    marginBottom: "15px",
-                  }}
-                >
-                  Dashboard Analytics
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: colors.textSecondary,
-                    lineHeight: "1.6",
-                    marginBottom: "20px",
-                    flex: "1",
-                  }}
-                >
-                  Dashboard interativo com gráficos em tempo real e métricas avançadas. 
-                  Interface intuitiva para análise de dados complexos.
-                </p>
-                <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <span style={{ 
-                    backgroundColor: "#f1c40f", 
-                    color: "#000", 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>D3.js</span>
-                  <span style={{ 
-                    backgroundColor: "#f1c40f", 
-                    color: "#000", 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>Chart.js</span>
-                  <span style={{ 
-                    backgroundColor: "#f1c40f", 
-                    color: "#000", 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>Angular</span>
-                </div>
-              </div>
-            </SpotlightCard>
-          </ScrollReveal>
-
-          <ScrollReveal delay={700}>
-            <SpotlightCard 
-              spotlightColor="rgba(26, 188, 156, 0.3)"
-              theme={theme}
-              backgroundColor={theme === "dark" ? "rgba(255, 255, 255, 0.05)" : "rgba(0, 0, 0, 0.05)"}
-              borderColor={theme === "dark" ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"}
-            >
-              <div style={{ textAlign: "center", height: "100%", display: "flex", flexDirection: "column" }}>
-                <div
-                  style={{
-                    width: "100%",
-                    height: "180px",
-                    backgroundColor: colors.surface,
-                    border: `2px dashed ${colors.border}`,
-                    borderRadius: "12px",
-                    margin: "0 auto 20px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "14px",
-                    color: colors.textSecondary,
-                  }}
-                >
-                  Imagem do Projeto
-                </div>
-                <h3
-                  style={{
-                    fontSize: "1.5rem",
-                    fontWeight: "bold",
-                    color: colors.text,
-                    marginBottom: "15px",
-                  }}
-                >
-                  API RESTful Avançada
-                </h3>
-                <p
-                  style={{
-                    fontSize: "16px",
-                    color: colors.textSecondary,
-                    lineHeight: "1.6",
-                    marginBottom: "20px",
-                    flex: "1",
-                  }}
-                >
-                  API robusta com autenticação JWT, documentação Swagger e 
-                  arquitetura escalável para aplicações de grande porte.
-                </p>
-                <div style={{ display: "flex", gap: "10px", justifyContent: "center", flexWrap: "wrap" }}>
-                  <span style={{ 
-                    backgroundColor: "#1abc9c", 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>Express.js</span>
-                  <span style={{ 
-                    backgroundColor: "#1abc9c", 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>MongoDB</span>
-                  <span style={{ 
-                    backgroundColor: "#1abc9c", 
-                    color: colors.text, 
-                    padding: "4px 12px", 
-                    borderRadius: "12px", 
-                    fontSize: "12px" 
-                  }}>JWT</span>
-                </div>
-              </div>
-            </SpotlightCard>
-          </ScrollReveal>
+              {["React", "TypeScript", "Node.js", "Vite", "Design UX/UI"].map(
+                (skill) => (
+                  <span
+                    key={skill}
+                    style={{
+                      backgroundColor: colors.accent,
+                      color: colors.text,
+                      padding: "8px 16px",
+                      borderRadius: "20px",
+                      fontSize: "14px",
+                      fontWeight: "500",
+                      opacity: 0.9,
+                      transition: "all 0.3s",
+                    }}
+                  >
+                    {skill}
+                  </span>
+                )
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -673,17 +255,16 @@ const Home = () => {
           margin: "0 auto",
         }}
       >
-        <h2
-          style={{
-            fontSize: "2.5rem",
-            fontWeight: "bold",
-            marginBottom: "30px",
-            color: colors.text,
-            textAlign: "center",
-          }}
-        >
-          Nossos Serviços
-        </h2>
+        <div style={{ textAlign: "center", marginBottom: "30px" }}>
+          <ScrollReveal
+            textClassName="scroll-reveal-title"
+            containerClassName="scroll-reveal-container"
+            baseOpacity={0.2}
+            baseRotation={2}
+          >
+            Nossos Serviços
+          </ScrollReveal>
+        </div>
 
         <div
           style={{
@@ -693,185 +274,185 @@ const Home = () => {
             marginTop: "50px",
           }}
         >
-          <ScrollReveal delay={200}>
-            <div
+          <div
+            style={{
+              backgroundColor: colors.surface,
+              padding: "30px",
+              borderRadius: "12px",
+              border: `1px solid ${colors.border}`,
+              transition: "transform 0.3s",
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.transform = "translateY(-5px)";
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.transform = "translateY(0)";
+            }}
+          >
+            <h3
               style={{
-                backgroundColor: colors.surface,
-                padding: "30px",
-                borderRadius: "12px",
-                border: `1px solid ${colors.border}`,
-                transition: "transform 0.3s",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLElement;
-                target.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLElement;
-                target.style.transform = "translateY(0)";
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: colors.accent,
+                marginBottom: "15px",
               }}
             >
-              <h3
-                style={{
-                  fontSize: "1.5rem",
-                  fontWeight: "bold",
-                  color: colors.accent,
-                  marginBottom: "15px",
-                }}
-              >
-                Desenvolvimento Web
-              </h3>
-              <p
-                style={{
-                  fontSize: "16px",
-                  color: colors.textSecondary,
-                  lineHeight: "1.6",
-                }}
+              Desenvolvimento Web
+            </h3>
+            <div>
+              <ScrollReveal
+                baseOpacity={0.4}
+                baseRotation={0.5}
+                textClassName="scroll-reveal-service"
               >
                 Criamos websites modernos e responsivos utilizando as melhores
                 tecnologias do mercado como React, TypeScript e Vite.
-              </p>
+              </ScrollReveal>
             </div>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal delay={300}>
-            <div
+          <div
+            style={{
+              backgroundColor: colors.surface,
+              padding: "30px",
+              borderRadius: "12px",
+              border: `1px solid ${colors.border}`,
+              transition: "transform 0.3s",
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.transform = "translateY(-5px)";
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.transform = "translateY(0)";
+            }}
+          >
+            <h3
               style={{
-                backgroundColor: colors.surface,
-                padding: "30px",
-                borderRadius: "12px",
-                border: `1px solid ${colors.border}`,
-                transition: "transform 0.3s",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLElement;
-                target.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLElement;
-                target.style.transform = "translateY(0)";
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: colors.error,
+                marginBottom: "15px",
               }}
             >
-              <h3
-                style={{
-                  fontSize: "1.5rem",
-                  fontWeight: "bold",
-                  color: colors.error,
-                  marginBottom: "15px",
-                }}
+              Design UX/UI
+            </h3>
+            <div>
+              <ScrollReveal
+                baseOpacity={0.4}
+                baseRotation={0.5}
+                textClassName="scroll-reveal-service"
               >
-                Design UX/UI
-              </h3>
-              <p
-                style={{
-                  fontSize: "16px",
-                  color: colors.textSecondary,
-                  lineHeight: "1.6",
-                }}
-              >
-                Desenvolvemos interfaces intuitivas e atrativas que
-                proporcionam a melhor experiência para seus usuários.
-              </p>
+                Desenvolvemos interfaces intuitivas e atrativas que proporcionam
+                a melhor experiência para seus usuários.
+              </ScrollReveal>
             </div>
-          </ScrollReveal>
+          </div>
 
-          <ScrollReveal delay={400}>
-            <div
+          <div
+            style={{
+              backgroundColor: colors.surface,
+              padding: "30px",
+              borderRadius: "12px",
+              border: `1px solid ${colors.border}`,
+              transition: "transform 0.3s",
+            }}
+            onMouseEnter={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.transform = "translateY(-5px)";
+            }}
+            onMouseLeave={(e) => {
+              const target = e.target as HTMLElement;
+              target.style.transform = "translateY(0)";
+            }}
+          >
+            <h3
               style={{
-                backgroundColor: colors.surface,
-                padding: "30px",
-                borderRadius: "12px",
-                border: `1px solid ${colors.border}`,
-                transition: "transform 0.3s",
-              }}
-              onMouseEnter={(e) => {
-                const target = e.target as HTMLElement;
-                target.style.transform = "translateY(-5px)";
-              }}
-              onMouseLeave={(e) => {
-                const target = e.target as HTMLElement;
-                target.style.transform = "translateY(0)";
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: colors.success,
+                marginBottom: "15px",
               }}
             >
-              <h3
-                style={{
-                  fontSize: "1.5rem",
-                  fontWeight: "bold",
-                  color: colors.success,
-                  marginBottom: "15px",
-                }}
-              >
-                Consultoria Digital
-              </h3>
-              <p
-                style={{
-                  fontSize: "16px",
-                  color: colors.textSecondary,
-                  lineHeight: "1.6",
-                }}
+              Consultoria Digital
+            </h3>
+            <div>
+              <ScrollReveal
+                baseOpacity={0.4}
+                baseRotation={0.5}
+                textClassName="scroll-reveal-service"
               >
                 Nossa equipe especializada está pronta para ajudar sua empresa
                 na transformação digital.
-              </p>
+              </ScrollReveal>
             </div>
-          </ScrollReveal>
+          </div>
         </div>
       </div>
 
       {/* Call to Action */}
-      <ScrollReveal delay={200}>
-        <div
+      <div
+        style={{
+          textAlign: "center",
+          backgroundColor: colors.surface,
+          color: colors.text,
+          padding: "60px 20px",
+          margin: "40px 20px",
+          borderRadius: "12px",
+          border: `1px solid ${colors.border}`,
+        }}
+      >
+        <div style={{ marginBottom: "20px" }}>
+          <ScrollReveal
+            textClassName="scroll-reveal-cta-title"
+            containerClassName="scroll-reveal-container"
+            baseOpacity={0.2}
+            baseRotation={1.5}
+          >
+            Pronto para começar?
+          </ScrollReveal>
+        </div>
+
+        <div style={{ marginBottom: "40px" }}>
+          <ScrollReveal
+            baseOpacity={0.3}
+            baseRotation={0.5}
+            textClassName="scroll-reveal-cta-text"
+          >
+            Entre em contato conosco e descubra como podemos ajudar seu negócio.
+          </ScrollReveal>
+        </div>
+
+        <button
           style={{
-            textAlign: "center",
-            backgroundColor: colors.surface,
+            backgroundColor: colors.success,
             color: colors.text,
-            padding: "60px 20px",
-            margin: "40px 20px",
-            borderRadius: "12px",
-            border: `1px solid ${colors.border}`,
+            border: "none",
+            padding: "20px 40px",
+            fontSize: "18px",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "bold",
+            transition: "all 0.3s",
+            boxShadow: `0 4px 15px rgba(39, 174, 96, 0.4)`,
+          }}
+          onMouseEnter={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.backgroundColor = colors.successHover;
+            target.style.transform = "translateY(-2px)";
+          }}
+          onMouseLeave={(e) => {
+            const target = e.target as HTMLElement;
+            target.style.backgroundColor = colors.success;
+            target.style.transform = "translateY(0)";
           }}
         >
-          <h2 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
-            Pronto para começar?
-          </h2>
-          <p
-            style={{
-              fontSize: "18px",
-              marginBottom: "40px",
-              color: colors.textSecondary,
-            }}
-          >
-            Entre em contato conosco e descubra como podemos ajudar seu
-            negócio.
-          </p>
-          <button
-            style={{
-              backgroundColor: colors.success,
-              color: colors.text,
-              border: "none",
-              padding: "20px 40px",
-              fontSize: "18px",
-              borderRadius: "8px",
-              cursor: "pointer",
-              fontWeight: "bold",
-              transition: "all 0.3s",
-              boxShadow: `0 4px 15px rgba(39, 174, 96, 0.4)`,
-            }}
-            onMouseEnter={(e) => {
-              const target = e.target as HTMLElement;
-              target.style.backgroundColor = colors.successHover;
-              target.style.transform = "translateY(-2px)";
-            }}
-            onMouseLeave={(e) => {
-              const target = e.target as HTMLElement;
-              target.style.backgroundColor = colors.success;
-              target.style.transform = "translateY(0)";
-            }}
-          >
-            Fale Conosco
-          </button>
-        </div>
-      </ScrollReveal>
+          Fale Conosco
+        </button>
+      </div>
     </div>
   );
 };
