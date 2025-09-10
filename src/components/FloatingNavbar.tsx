@@ -270,7 +270,6 @@ const FloatingNavbar = () => {
               userSelect: "none",
               willChange: "transform, font-size",
               color: colors.text,
-              filter: "grayscale(1)",
             }}
             onClick={toggleTheme}
             onMouseEnter={(e) => {
